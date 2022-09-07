@@ -9,7 +9,7 @@ export default class Snake extends BunderSnake {
   public direction:string = 'UP';
   public cells:Type.Cells = [];
 
-  public bodyLen:number = 1;
+  public bodyLen:number = 19;
   public body:Type.SnakeBody = [];
 
   /// CALLBACKS //
@@ -109,7 +109,7 @@ export default class Snake extends BunderSnake {
     this.Collision.border(head);
 
     this.body.shift();
-    this.Collision.tail(head);
+      this.Collision.tail(head);
     this.body.push(head);
   }
 

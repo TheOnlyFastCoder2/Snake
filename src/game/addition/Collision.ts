@@ -16,7 +16,7 @@ export default class Collision {
   }
 
   tail (head:Type.Coords) {
-    for(let i = 1; i < cntx.body.length; i++) {
+    for(let i = 0; i < cntx.body.length; i++) {
       if(head.x === cntx.body[i].x && head.z === cntx.body[i].z) 
       {
         cntx.setterLives(--cntx.lives);
