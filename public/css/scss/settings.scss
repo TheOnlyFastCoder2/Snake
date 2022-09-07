@@ -15,14 +15,12 @@ body {
   height: 100vh;
   overflow: hidden;
   background: #000;
-  /* background: black; */
   
 }
 
 .root {
-  // position: relative;
-  width: 2048px;
-  height: 1074px;
+  width: 1620px;
+  height: 900px;
   canvas {
     position: relative;
     width: 100%;
