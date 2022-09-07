@@ -9,7 +9,7 @@ export default class Snake extends BunderSnake {
   public direction:string = 'UP';
   public cells:Type.Cells = [];
 
-  public bodyLen:number = 1;
+  public bodyLen:number = 14;
   public body:Type.SnakeBody = [];
 
   /// CALLBACKS //
@@ -18,15 +18,20 @@ export default class Snake extends BunderSnake {
   public setterLives!: Function;
 
   public animFrame;
-
   constructor() {
     super();
     this.setBuild(this);
+
     this.animFrame = this.Grid.initAnimFrame(
       0.09,0.005,
       () => {
-        this.drawSnake();
-        this.setUpdate();
+        if(this.lives >= 1) {
+          this.setUpdate();
+          this.drawSnake();
+        }
+        else {
+          this.animFrame.getStop();
+        }
       }
     )
     this.controlPanel();
@@ -99,7 +104,6 @@ export default class Snake extends BunderSnake {
 
   setUpdate() {
     const head:Type.Coords = {...this.getHead()};
-
     this.body.shift();
 
     this.Collision.border(head);
@@ -111,11 +115,11 @@ export default class Snake extends BunderSnake {
 
   drawSnake() {
     for(let i = 0; i < this.body.length; i++) {
-        this.cells[i].position.x = this.Grid.getCoord(this.body[i].x);
-        this.cells[i].position.z = this.Grid.getCoord(this.body[i].z);
+      this.cells[i].position.x = this.Grid.getCoord(this.body[i].x);
+      this.cells[i].position.z = this.Grid.getCoord(this.body[i].z);
     }
   }
-
+  
   main() {
     this.createGrid();
     this.Berry.Default();
@@ -128,6 +132,24 @@ export default class Snake extends BunderSnake {
     this.frame.draw();
   }
 
+  resetGame() {
+    this.cells = [];
+    this.body = []
+    this.score = 0;
+    this.lives = this.maxLives;
+    this.direction = 'UP';
+  
+    this.frame.delFrame();
+    this.frame.getScene.remove.apply(
+      this.frame.getScene,
+      this.frame.getScene.children
+    );
+
+    this.animFrame.getStart();
+    this.frame = this.Grid.initFrame();
+    this.main();
+  }
+
   getHead() {
     return this.body.at(-1)!;
   }
@@ -135,25 +157,13 @@ export default class Snake extends BunderSnake {
   initTail (callback:Function) {
     this.setterTail = () => callback(this.body.length-1);
   }
+
   initScore (callback:Function) {
     this.setterScore = () => callback(this.score); 
   }
 
   initLives (callback:Function) {
     this.setterLives = () => callback(this.lives); 
-  }
-
-  resetGame() {
-    this.score = 0;
-    this.direction = 'UP';
-
-    this.frame.getScene.remove.apply(
-      this.frame.getScene,
-      this.frame.getScene.children
-    );
-    this.frame.delFrame();
-    this.frame = this.Grid.initFrame();
-    this.main();
   }
   
   stopGame() {

@@ -13,9 +13,7 @@ export default class Berry{
   } 
 
   Default () {
-    if(!this.default)
-      this.default = this.createСarcass('#CC3924');
-    
+    this.default = this.createСarcass('#CC3924');
     this.changePosBerry(this.default);
     this.default.action = () => {
       cntx.Berry.changePosBerry(this.default);
@@ -42,7 +40,6 @@ export default class Berry{
   createСarcass (color:string):Type.Berry {
     const mesh = cntx.createCell(color);
     mesh.position.y = cntx.Grid.getPosY();
-
     return {
       mesh:mesh,
       pos:{x:0,z:0,y:0},

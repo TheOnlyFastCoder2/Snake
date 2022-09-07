@@ -17,7 +17,6 @@ class RequesAnimation  {
     this.updateFrequency = freq;
     this.updateFrequencyStep = freqStep;
     this.frame(callback);
-    this.winTarget();
   }
 
   getStart() {this.isCanvasVisible = true;}

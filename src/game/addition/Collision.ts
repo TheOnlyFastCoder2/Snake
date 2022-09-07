@@ -20,9 +20,6 @@ export default class Collision {
       if(head.x === cntx.body[i].x && head.z === cntx.body[i].z) 
       {
         cntx.setterLives(--cntx.lives);
-        if(cntx.lives === 0) {
-          cntx.animFrame.getStop();
-        }
       }
     }
   }
