@@ -40,8 +40,8 @@ export default function () {
     <div className="Menu" ref={refMenu}>
       <div className="Menu-container">
           <ul>
-            <li onClick={() => hideMenu()}>продолжить</li>
-            <li onClick={resetGame}>новая игра</li>
+            <li onClick={() => hideMenu()}>Continue</li>
+            <li onClick={resetGame}>New game</li>
           </ul>
       </div>
     </div>
