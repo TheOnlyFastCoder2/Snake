@@ -9,7 +9,7 @@ export default class Snake extends BunderSnake {
   public direction:string = 'UP';
   public cells:Type.Cells = [];
 
-  public bodyLen:number = 19;
+  public bodyLen:number = 1;
   public body:Type.SnakeBody = [];
 
   /// CALLBACKS //
