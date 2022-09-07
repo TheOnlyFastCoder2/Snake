@@ -15,18 +15,19 @@ export default class Berry{
   Default () {
     this.default = this.createСarcass('#CC3924');
     this.changePosBerry(this.default);
+    
     this.default.action = () => {
       cntx.Berry.changePosBerry(this.default);
 
+      cntx.cells.unshift(cntx.createCell('#E42222'));
       cntx.body.push({
         x: cntx.body[cntx.body.length-1].x,
         z: cntx.body[cntx.body.length-1].z
-      })
+      });
 
       cntx.score++;
-      cntx?.setterScore(cntx.score);
-      cntx?.setterTail(cntx.body.length-1)
-      cntx.cells.unshift(cntx.createCell('#E42222'));
+      cntx?.setterScore();
+      cntx?.setterTail();
     }
   }
 

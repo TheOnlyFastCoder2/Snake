@@ -92,24 +92,24 @@ export default class Snake extends BunderSnake {
   createSnake(lenBody:number) {
     for(let i = 0; i <= lenBody; i++) {
       if( i === lenBody) {
-        this.cells[i] = (this.createCell('#2C22E4'));
-        this.body[i] = ({x:i,z:0});
+        this.cells.push(this.createCell('#2C22E4'));
+        this.body.push({x:i,z:0});
       }
       else {
-        this.cells[i] = (this.createCell('#E42222'));
-        this.body[i] = ({x:i,z:0});
+        this.cells.push(this.createCell('#E42222'));
+        this.body.push({x:i,z:0});
       }
     }
   }
 
   setUpdate() {
     const head:Type.Coords = {...this.getHead()};
-    this.body.shift();
 
-    this.Collision.border(head);
     this.Collision.berry(head);
+    this.Collision.border(head);
+
+    this.body.shift();
     this.Collision.tail(head);
-  
     this.body.push(head);
   }
 
