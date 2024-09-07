@@ -26,8 +26,6 @@ export default class Snake extends BunderSnake {
       0.09,0.005, this.callbackForAnimFrame.bind(this)
     )
 
-    this.animFrame.toBindContextToCallback()
-    this.animFrame.winTarget();
     this.controlPanel();
   }
 
@@ -38,7 +36,6 @@ export default class Snake extends BunderSnake {
       this.frame.draw();
     }
     else {
-      this.animFrame.getStop();
       this.animFrame.cancelFrameAnimation();
     }
   }
@@ -136,6 +133,8 @@ export default class Snake extends BunderSnake {
     this.setterTail();
     this.setterLives();
 
+    this.animFrame.toBindContextToCallback()
+    this.animFrame.winTarget();
     this.animFrame.toStartFrame();
   }
 
