@@ -1,6 +1,6 @@
 import Frame from 'game/resource/scene';
 import Resource from 'game/resource/Resource';
-import RequesAnimation from 'game/resource/RequesAnimation';
+import RequestAnimation from 'src/game/resource/RequestAnimation';
 
 import * as THREE from "three";
 
@@ -45,7 +45,7 @@ export default class InitGrid extends Resource {
     return frame;
   }
 
-  initAnimFrame(freq:number, freqStep:number, draw:Function):RequesAnimation {
-    return new RequesAnimation(freq,freqStep,draw);
+  initAnimFrame(freq:number, freqStep:number, draw:Function):RequestAnimation {
+    return new RequestAnimation(freq,freqStep,draw);
   }
 }

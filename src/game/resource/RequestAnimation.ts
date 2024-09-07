@@ -1,4 +1,4 @@
-class RequesAnimation  {
+class RequestAnimation  {
   public frameID: number = 0;
   private timer:number = 0;
 
@@ -85,4 +85,4 @@ class RequesAnimation  {
   }
 }
 
-export default RequesAnimation
+export default RequestAnimation

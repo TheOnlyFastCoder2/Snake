@@ -5,7 +5,6 @@ export default class Scene {
   private scene;
   private camera;
   private renderer;
-  private timeId:number = 0;
 
   constructor(canvas:HTMLCanvasElement,) 
   {
@@ -13,7 +12,7 @@ export default class Scene {
     this.camera = new THREE.PerspectiveCamera( 78,canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000 )
 
     this.renderer = new THREE.WebGLRenderer({canvas,antialias:true});
-    this.renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);    
+    this.renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);   
   }
 
   setOrbitControls() {
@@ -39,13 +38,8 @@ export default class Scene {
     this.scene.add(light);
   }
 
-  delFrame() {
-    cancelAnimationFrame(this.timeId)
-  }
-  draw(callback?:Function) {
-    this.timeId = requestAnimationFrame( this.draw.bind(this, callback) );
+  draw() {
     this.renderer.render( this.scene, this.camera );
-    callback && callback();
   }
 
   get getScene() {return this.scene}

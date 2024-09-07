@@ -23,21 +23,24 @@ export default class Snake extends BunderSnake {
     this.setBuild(this);
 
     this.animFrame = this.Grid.initAnimFrame(
-      0.09,0.005,
-      () => {
-        if(this.lives >= 1) {
-          this.setUpdate();
-          this.drawSnake();
-        }
-        else {
-          this.animFrame.getStop();
-        }
-      }
+      0.09,0.005, this.callbackForAnimFrame.bind(this)
     )
+
     this.animFrame.toBindContextToCallback()
     this.animFrame.winTarget();
-    this.animFrame.toStartFrame();
     this.controlPanel();
+  }
+
+  callbackForAnimFrame () {
+    if(this.lives >= 1) {
+      this.setUpdate();
+      this.drawSnake();
+      this.frame.draw();
+    }
+    else {
+      this.animFrame.getStop();
+      this.animFrame.cancelFrameAnimation();
+    }
   }
 
   controlPanel() {
@@ -112,7 +115,7 @@ export default class Snake extends BunderSnake {
     this.Collision.border(head);
 
     this.body.shift();
-      this.Collision.tail(head);
+    this.Collision.tail(head);
     this.body.push(head);
   }
 
@@ -124,6 +127,7 @@ export default class Snake extends BunderSnake {
   }
   
   main() {
+    this.setBuild(this);
     this.createGrid();
     this.Berry.Default();
     this.createSnake(this.bodyLen);
@@ -132,7 +136,7 @@ export default class Snake extends BunderSnake {
     this.setterTail();
     this.setterLives();
 
-    this.frame.draw();
+    this.animFrame.toStartFrame();
   }
 
   resetGame() {
@@ -141,15 +145,13 @@ export default class Snake extends BunderSnake {
     this.score = 0;
     this.lives = this.maxLives;
     this.direction = 'UP';
-  
-    this.frame.delFrame();
+    
+    this.animFrame.cancelFrameAnimation();
     this.frame.getScene.remove.apply(
       this.frame.getScene,
       this.frame.getScene.children
     );
 
-    this.animFrame.getStart();
-    this.frame = this.Grid.initFrame();
     this.main();
   }
 

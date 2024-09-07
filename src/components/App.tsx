@@ -22,6 +22,7 @@ export default function () {
       <h1>SCORE:{score}</h1>
       <h1>LENGTH:{tailLen}</h1>
       <h1>Lives:{lives}</h1>
+      <h4>presskey ESC to open menu</h4>
     </>
   )
 }
