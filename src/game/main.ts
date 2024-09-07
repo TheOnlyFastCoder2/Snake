@@ -34,6 +34,9 @@ export default class Snake extends BunderSnake {
         }
       }
     )
+    this.animFrame.toBindContextToCallback()
+    this.animFrame.winTarget();
+    this.animFrame.toStartFrame();
     this.controlPanel();
   }
 

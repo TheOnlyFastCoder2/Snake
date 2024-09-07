@@ -1,4 +1,4 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial,MeshPhongMaterial } from "three";
+import { BoxGeometry, Mesh, MeshBasicMaterial} from "three";
 
  
 export type Coords ={x:number,z:number, y?:number};

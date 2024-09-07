@@ -3,6 +3,7 @@ import Snake from 'src/game/main'
 
 let cntx:Snake;
 export default class Collision {
+  private currDirection: string = '';
   constructor(c:Snake){
     cntx = c;
   } 
@@ -25,12 +26,20 @@ export default class Collision {
   }
 
   border(head:Type.Coords) {
-    switch(cntx.direction) {
-      case 'UP': head.x = (head.x+1) % cntx.Grid.divisGrid; break;
-      case 'DOWN': head.x = (head.x-1) % cntx.Grid.divisGrid; break;
-      case 'LEFT': head.z = (head.z-1) % cntx.Grid.divisGrid; break;
-      case 'RIGHT': head.z = (head.z+1) % cntx.Grid.divisGrid; break;
+    if(
+      this.currDirection !== 'LEFT' && cntx.direction !== 'RIGHT' ||
+      this.currDirection !== 'RIGHT' && cntx.direction !== 'LEFT' ||
+      this.currDirection !== 'UP' && cntx.direction !== 'DOWN' ||
+      this.currDirection !== 'DOWN' && cntx.direction !== 'UP'
+    ) {
+      switch(cntx.direction) {
+        case 'UP': head.x = (head.x+1) % cntx.Grid.divisGrid; break;
+        case 'DOWN': head.x = (head.x-1) % cntx.Grid.divisGrid; break;
+        case 'LEFT': head.z = (head.z-1) % cntx.Grid.divisGrid; break;
+        case 'RIGHT': head.z = (head.z+1) % cntx.Grid.divisGrid; break;
+      }
     }
+    
 
     if(head.x < 0) head.x = cntx.Grid.divisGrid-1;
     else if (head.z < 0) head.z = cntx.Grid.divisGrid-1;
